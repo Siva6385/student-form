@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Form</title>
+    <style>
+      .Student_form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        font-size: 20px;
+      }
+  
+      .user_details {
+        padding: 20px;
+        display: flex;
+        align-items: center;
+        font-size: large;
+        justify-content: center;
+        position: relative;
+        left: 10PX;
+    
+      }
+  
+      .user_details input,
+      .user_details select {
+        cursor: pointer;
+      }
+  
+      .user_details input[type="submit"] {
+        background-color:rgb(98, 239, 98);
+        padding-left: 100px;
+        padding-right: 110px;
+        cursor: pointer;
+        position: relative;
+        left: 0px;
+      }
+  
+      .user_details input[type="submit"]:hover {
+        background-color: green;
+      }
+  
+      .user_table{
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+        margin: 30px;
+      
+      }
+    </style>
+  </head>
+
+<body>
+    <section class="Student_form">
+        <h1>Student Form</h1>
+      </section>
+      <form class="user_details" id="userForm">
+        <table border="1">
+          <tbody><tr>
+            <td>Name :</td>
+            <td><input type="text" name="Name" placeholder="Enter your Name"></td>
+          </tr>
+          <tr>
+            <td>Age :</td>
+            <td><input type="text" name="Age" placeholder="Enter your Age"></td>
+          </tr>
+          <tr>
+            <td>Gender :</td>
+            <td>
+              <select name="Gender">
+                <option>Male</option>
+                <option>Female</option>
+                <option>Other</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>Courses :</td>
+            <td>
+              <select name="Courses">
+                <option>Python</option>
+                <option>Javascript</option>
+                <option>C++</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>Email :</td>
+            <td><input type="text" name="Email" placeholder="Email id"></td>
+          </tr>
+          <tr>
+            <td colspan="2"><input type="submit" value="Save"></td>
+          </tr>
+        </tbody></table>
+      </form>
+      <section class="user_table">
+        <h1>User Table</h1>
+        <table border="1" id="userTable">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Age</th>
+              <th>Gender</th>
+              <th>Courses</th>
+              <th>Email</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </section>
+
+    </div>
+    <script>
+        
+    const form = document.getElementById("userForm");
+    const userTable = document.getElementById("userTable").getElementsByTagName("tbody")[0];
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const formData = new FormData(form);
+
+      const userDetails = {
+        Name: formData.get("Name"),
+        Age: formData.get("Age"),
+        Gender: formData.get("Gender"),
+        Courses: formData.get("Courses"),
+        Email: formData.get("Email"),
+      };
+
+      const row = userTable.insertRow();
+
+      row.innerHTML = `
+        <td>${userDetails.Name}</td>
+        <td>${userDetails.Age}</td>
+        <td>${userDetails.Gender}</td>
+        <td>${userDetails.Courses}</td>
+        <td>${userDetails.Email}</td>
+        <td>
+          <button onclick="deleteRow(this)">Delete</button>
+        </td>
+      `;
+
+      form.reset();
+    });
+
+    function deleteRow(button) {
+      button.parentNode.parentNode.remove();
+    }
+  
+    </script>
+
+    
+
+
+   
+    
+</body>
+</html>
